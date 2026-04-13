@@ -36,6 +36,12 @@ jobs:
               for label in (pr.get('labels') or [])
               if isinstance(label, dict) and label.get('name')
           }
+          actor = ((pr.get('user') or {}).get('login') or '').lower()
+          trusted_bots = {'dependabot[bot]', 'renovate[bot]', 'github-actions[bot]'}
+
+          if actor in trusted_bots:
+              print(f'Skipping linked-issue check for trusted bot actor: {actor}')
+              raise SystemExit(0)
 
           if 'no-linked-issue-required' in labels:
               print('Bypass label present: no-linked-issue-required')

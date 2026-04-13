@@ -47,6 +47,9 @@ jobs:
               r'^draft\b',
               r'^\[\s*draft\s*\]',
               r'^\(\s*draft\s*\)',
+              r'^(dnm|do not merge)\b',
+              r'^\[\s*(dnm|do not merge)\s*\]',
+              r'^\(\s*(dnm|do not merge)\s*\)',
           ]
 
           if any(re.match(pattern, title, re.IGNORECASE) for pattern in invalid_patterns):
